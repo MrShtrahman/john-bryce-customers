@@ -1,5 +1,24 @@
 import { Schema, model } from 'mongoose';
 
+export interface ICustomer {
+    _id?: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    address?: Address;
+    paymentMethod: PaymentMethod;
+    isConfirmed: boolean;
+    createdAt?: Date;
+  }
+  
+export interface Address {
+    street: string,
+    city: string,
+    state: string,
+    postalCode: string
+}
+
 export enum PaymentMethod {
     credit_card = 'credit_card',
     debit_card = 'debit_card',
@@ -11,7 +30,7 @@ export enum PaymentMethod {
     gold_bars = 'gold_bars'
 }
 
-const customerSchema = new Schema({
+export const customerSchema = new Schema({
   firstName: {
     type: String,
     required: true
@@ -49,3 +68,5 @@ const customerSchema = new Schema({
     default: Date.now
   }
 });
+
+export const Customer = model('Customer', customerSchema);
