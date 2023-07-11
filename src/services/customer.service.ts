@@ -1,9 +1,8 @@
 import { Injectable, Body } from '@nestjs/common';
 import { ICustomer } from 'src/schema';
-import { AxiosResponse, AxiosError } from 'axios';
-import { Observable, firstValueFrom, catchError } from 'rxjs';
+import { AxiosError } from 'axios';
+import { firstValueFrom, catchError } from 'rxjs';
 import {HttpService} from "@nestjs/axios";
-import { Axios } from "axios"
 @Injectable()
 export class CustomerService {
     constructor(private readonly httpService: HttpService) {}
