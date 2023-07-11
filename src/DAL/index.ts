@@ -1,18 +1,18 @@
 import { Customer, ICustomer } from '../schema';
 
-export const getCustomerById = async (id: string) => {
+export const getCustomerById = async (id: string) : Promise<ICustomer> => {
     try {
-        const customerToFind = await Customer.findById(id);
+        const customerToFind = await Customer.findById<ICustomer>(id);
         return customerToFind;
     } catch (error) {
         console.error(`Cannot find customer by id ${id}: ${error.message}`)
     }
 }
 
-export const getCustomerByName = async (firstName: string, lastName: string) => {
+export const getCustomerByName = async (firstName: string, lastName: string): Promise<Array<ICustomer>> => {
     try {
-        const customerToFind = await Customer.find({ $and: [{ firstName }, { lastName }] });
-        return customerToFind;
+        const customersToFind = await Customer.find<ICustomer>({ $and: [{ firstName }, { lastName }] });
+        return customersToFind;
     } catch (error) {
         console.error(`Cannot find customer by name ${firstName} ${lastName}: ${error.message}`)
     }
