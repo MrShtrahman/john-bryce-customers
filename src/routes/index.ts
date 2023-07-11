@@ -23,7 +23,7 @@ app.patch('/customer', (req: Request, res: Response) => {
 
 // Endpoint for deleting an existing Customer
 app.delete('/customer', (req: Request, res: Response) => {
-    res.send(service.createCustomer(req.params.customer));
+    res.send(service.removeCustomer(req.params.id));
 });
 
 // Start the server
