@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package myapp;
+
+service CustomerService {
+  rpc UpdateCustomer(UpdateCustomerRequest) returns (UpdateCustomerResponse);
+  rpc DeleteCustomer(DeleteCustomerRequest) returns (DeleteCustomerResponse);
+}
+
+message Customer {
+  string id = 1;
+  string name = 2;
+  string address = 3;
+  string phoneNumber = 4;
+  string email = 5;
+}
+
+message UpdateCustomerRequest {
+  Customer customer = 1;
+}
+
+message UpdateCustomerResponse {
+  Customer customer = 1;
+}
+
+message DeleteCustomerRequest {
+  string id = 1;
+}
+
+message DeleteCustomerResponse {
+  Customer customer = 1;
+}
