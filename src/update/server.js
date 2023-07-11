@@ -20,9 +20,8 @@ const port = 3000;
 app.use(bodyParser.json());
 
   // Update customer endpoint
-  app.put('/customers/:id', (req, res) => {
-    const { id } = req.params;
-    const { name, address, phoneNumber, email } = req.body;
+  app.put('/updateCustomer/', (req, res) => {
+    const { id, name, address, phoneNumber, email } = req.body;
   
     const updateRequest = {
       id,
@@ -42,8 +41,8 @@ app.use(bodyParser.json());
     });
   });
 
-  app.delete('/customers/:id', (req, res) => {
-    const { id } = req.params;
+  app.delete('/deleteCustomer/', (req, res) => {
+    const { id } = req.body;
   
     const deleteRequest = {
       id,
