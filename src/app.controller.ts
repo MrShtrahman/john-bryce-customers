@@ -6,27 +6,27 @@ import { CustomerService } from './services/customer.service';
 export class AppController {
   constructor(private readonly customerService: CustomerService) {}
 
-    @Patch()
+    @Patch("/Update")
     async updateCustomer(@Body() customer: ICustomer): Promise<ICustomer> {
         return await this.customerService.updateCustomer(customer);
     }
   
-    @Get()
+    @Get("/GetById")
     async getCustomerById(@Body() id: string): Promise<ICustomer> {
         return await this.customerService.getCustomerById(id);
     }
 
-    @Get()
-    async getCustomerName(@Body() name: string): Promise<ICustomer> {
+    @Get("/GetByName")
+    async getCustomerByName(@Body() name: string): Promise<ICustomer> {
         return await this.customerService.getCustomerById(name);
     }
 
-    @Post()
+    @Post("/Create")
     async createCustomer(@Body() customer: ICustomer): Promise<ICustomer> {
         return await this.customerService.createCustomer(customer);
     }
 
-    @Delete()
+    @Delete("/Delete")
     async deleteCustomer(@Body() customer: ICustomer): Promise<ICustomer> {
         return await this.customerService.createCustomer(customer);
     }
