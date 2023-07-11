@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "target": "ES2022",
     "module": "CommonJS",
     "lib": ["DOM", "ES6"],
@@ -9,8 +13,14 @@
     "rootDir": ".",
     "outDir": "dist",
     "allowSyntheticDefaultImports": true,
-    "importHelpers": false,
-    "alwaysStrict": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false
   }
 }
