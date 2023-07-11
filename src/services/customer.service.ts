@@ -8,7 +8,7 @@ export class CustomerService {
     constructor(private readonly httpService: HttpService) {}
 
     async updateCustomer(customer: ICustomer): Promise<ICustomer> {
-        const updateRoute = "idk";
+        const updateRoute = "/customer";
             const { data } = await firstValueFrom(this.httpService.patch(updateRoute, {customer}).pipe(catchError((error: AxiosError) => {
                 console.error(error.response.data);
                 throw error;
@@ -17,7 +17,7 @@ export class CustomerService {
     }
 
     async createCustomer(customer: ICustomer): Promise<ICustomer> {
-        const createRoute = "idk";
+        const createRoute = "/customer";
         const { data } = await firstValueFrom(this.httpService.post(createRoute, {customer}).pipe(catchError((error: AxiosError) => {
             console.error(error.response.data);
             throw error;
@@ -26,7 +26,7 @@ export class CustomerService {
     }
 
     async deleteCustomer(id: string): Promise<boolean> {
-        const deleteRoute = "idk";
+        const deleteRoute = "/customer/:id";
         const { data } = await firstValueFrom(this.httpService.post(deleteRoute, {id}).pipe(catchError((error: AxiosError) => {
             console.error(error.response.data);
             throw error;
@@ -35,7 +35,7 @@ export class CustomerService {
     }
 
     async getCustomerById(id: string): Promise<ICustomer> {
-        const getByIdRoute = "idk";
+        const getByIdRoute = "/customer/:id";
         const { data } = await firstValueFrom(this.httpService.get(getByIdRoute, {data: {id}}).pipe(catchError((error: AxiosError) => {
             console.error(error.response.data);
             throw error;
@@ -44,7 +44,7 @@ export class CustomerService {
     }
     
     async getCustomerByName(id: string): Promise<ICustomer> {
-        const getByNameRoute = "idk";
+        const getByNameRoute = "/customer";
         const { data } = await firstValueFrom(this.httpService.get(getByNameRoute,{data: {id}}).pipe(catchError((error: AxiosError) => {
             console.error(error.response.data);
             throw error;
