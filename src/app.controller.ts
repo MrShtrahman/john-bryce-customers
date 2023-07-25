@@ -1,33 +1,35 @@
 import { Controller, Get, Patch, Post, Delete, Body } from '@nestjs/common';
 import { ICustomer } from './schema';
-import { CustomerService } from './services/customer.service';
+
+import { createCustomer, deleteCustomer, getCustomerById, getCustomerByName, updateCustomer } from './DAL';
+
 
 @Controller()
 export class AppController {
-  constructor(private readonly customerService: CustomerService) {}
+  constructor() {}
 
     @Patch("/Update")
-    async updateCustomer(@Body() customer: ICustomer): Promise<ICustomer> {
-        return await this.customerService.updateCustomer(customer);
+    async updateCustomer(@Body() customer: ICustomer): Promise<boolean> {
+        return await updateCustomer(customer);
     }
   
     @Get("/GetById")
-    async getCustomerById(@Body() id: string): Promise<ICustomer> {
-        return await this.customerService.getCustomerById(id);
+    async getCustomerById(@Body() req: { id: string }): Promise<ICustomer> {
+        return await getCustomerById(req.id);
     }
 
     @Get("/GetByName")
-    async getCustomerByName(@Body() name: string): Promise<ICustomer> {
-        return await this.customerService.getCustomerById(name);
+    async getCustomerByName(@Body() req: { firstName: string, lastName: string }): Promise<ICustomer[]> {
+        return await getCustomerByName(req.firstName, req.lastName);
     }
 
     @Post("/Create")
-    async createCustomer(@Body() customer: ICustomer): Promise<ICustomer> {
-        return await this.customerService.createCustomer(customer);
+    async createCustomer(@Body() customer: ICustomer): Promise<boolean> {
+        return await createCustomer(customer);
     }
 
     @Delete("/Delete")
-    async deleteCustomer(@Body() customer: ICustomer): Promise<ICustomer> {
-        return await this.customerService.createCustomer(customer);
+    async deleteCustomer(@Body() req: { id: string }): Promise<boolean> {
+        return await deleteCustomer(req.id);
     }
 }

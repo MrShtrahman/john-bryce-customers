@@ -2,6 +2,7 @@ import { Customer, ICustomer } from '../schema';
 
 export const getCustomerById = async (id: string) : Promise<ICustomer> => {
     try {
+        console.log('id :>> ', id);
         const customerToFind = await Customer.findById<ICustomer>(id);
         return customerToFind;
     } catch (error) {
@@ -9,7 +10,7 @@ export const getCustomerById = async (id: string) : Promise<ICustomer> => {
     }
 }
 
-export const getCustomerByName = async (firstName: string, lastName: string): Promise<Array<ICustomer>> => {
+export const getCustomerByName = async (firstName: string, lastName: string): Promise<ICustomer[]> => {
     try {
         const customersToFind = await Customer.find<ICustomer>({ $and: [{ firstName }, { lastName }] });
         return customersToFind;
@@ -18,12 +19,13 @@ export const getCustomerByName = async (firstName: string, lastName: string): Pr
     }
 }
 
-export const deleteCustomer = async (id: string) => {
+export const deleteCustomer = async (id: string): Promise<boolean> => {
     try {
-        const deletionResult = await Customer.findByIdAndDelete(id);
-        return deletionResult;
+        await Customer.findByIdAndDelete(id);
+        return true;
     } catch (error) {
-        console.error(`Cannot delete customer by id ${id}: ${error.message}`)
+        console.error(`Cannot delete customer by id ${id}: ${error.message}`);
+        return false;
     }
 }
 
@@ -31,17 +33,20 @@ export const createCustomer = async (customer: ICustomer) => {
     const customerToAdd = new Customer(customer);
 
     try {
-        const insertResult = await customerToAdd.save();
-        return insertResult;
+        await customerToAdd.save();
+        return true;
     } catch (error) {
         console.error(`Cannot save ${customerToAdd.firstName} ${customerToAdd.lastName}: ${error.message}`)
+        return false;
     }
 }
 
-export const updateCustomer = async (customer: ICustomer) => {
+export const updateCustomer = async (customer: ICustomer): Promise<boolean> => {
     try {
         await Customer.findByIdAndUpdate(customer._id, customer);
+        return true;
     } catch (error) {
-        console.error(`Cannot update ${customer.firstName} ${customer.lastName}: ${error.message}`)
+        console.error(`Cannot update ${customer.firstName} ${customer.lastName}: ${error.message}`);
+        return false;
     }
 }
